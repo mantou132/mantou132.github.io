@@ -153,8 +153,9 @@
 	    	float:left;
 	    	width: calc(30% - 1rem);
 	    	height: calc(70% - 2rem);
-	    	overflow: auto;
+	    	overflow-y: auto;
 	    	background: ${theme[theme_select].cc};
+	    	word-wrap: break-word;
 	    }
 	    .debug p {
 			margin: 0px;
@@ -304,7 +305,8 @@ function debug(e){
 					break;
 				case "function":
 					fun = true;
-					msg = msg.replace(/{(.*)}/,"{}");
+					console.log(msg.toString());
+					msg = msg.toString().replace(/{(.|\n|\r)*}/,"{}");
 					break;
 				case "number":
 					number= true;
