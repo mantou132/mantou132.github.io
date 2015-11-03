@@ -111,11 +111,11 @@
 	    	position: relative;
 	        height: calc(100% - 5rem - 0rem);
 	        margin-top:1rem;
-	        font-family: "Consolas","微软雅黑";
+	        font-family: "Consolas","微软雅黑",sans-serif,monospace;
 	    }
 	    .code{
 	    	font-size: 1rem;
-	        font-family: "Consolas","微软雅黑";
+	        font-family: "Consolas","微软雅黑",sans-serif,monospace;
 	        margin: 0px 1rem 1rem 1rem;
 	        line-height: 1.2rem;
 	        overflow: auto;
