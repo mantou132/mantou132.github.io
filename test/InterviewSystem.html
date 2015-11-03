@@ -70,10 +70,10 @@ fire();</textarea>
     <script src="CodeMirror2/javascript.js"></script>
     <script src="js/interview_system.js"></script>
 
-<!-- 
+
     <script src="js/togetherjs-min.js"></script>
     <script>TogetherJS(this)</script>
-     -->
+    
     <style type="text/css">
         /*补丁*/
         .togetherjs-cursor{
@@ -84,6 +84,15 @@ fire();</textarea>
         .togetherjs .togetherjs-window > header{
             border-radius: 0px !important;
         }
+       #togetherjs-dock{
+          right: -50px !important;
+           overflow: hidden;
+           transition: .5s ease-out all;
+           bottom: calc(50% - 130px) !important;
+       }
+       #togetherjs-dock:hover{
+          right: 0px !important;
+       }
     </style>
 </body>
 
