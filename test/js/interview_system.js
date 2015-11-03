@@ -217,7 +217,36 @@
 	        z-index: 8;
 	        background: ${theme[theme_select].cc};
 	        overflow: hidden;
-	    }
+		    position: relative;
+		}
+		.video:before{
+			content: "WebRTC";
+			position: absolute;
+			line-height: 100%;
+			height: 100%;
+			font-size: 3rem;
+			display: block;
+			top:calc(50% - .5rem);
+			text-align: center;
+			width: 100%;
+			opacity: .3;
+			cursor: default;
+			z-index: -1;
+		}
+		.video button{
+			border:none;
+			padding: .4em;
+			width: 50%;
+			height: 2rem;
+			margin: 0em;
+			float: left;
+			cursor: pointer;
+			background-color: #ddd;
+		}
+		.video button[disabled]:hover {
+			background-color: #ddd;
+			cursor: not-allowed;
+		}
 	    video{
 	    	object-fit: cover;
 	        height: 100%;
@@ -238,7 +267,7 @@
 					st.innerHTML = themeInnerHTML(name);
 					window.localStorage.theme = name;
 				}catch(e){
-					throw "主题设置错误";
+					throw "可能没有这个主题";
 					console.log(e);
 				}
 			}else{
@@ -275,60 +304,80 @@ window.addEventListener("DOMContentLoaded",function(e) {
 
 document.addEventListener("keydown",debug,false);
 
+window._console = function(code){
+	var debug = document.getElementsByClassName('debug')[0];
+	var error = false,
+		defined = true,
+		object = false,
+		string= false,
+		number= false;
+		fun = false;
+	try{
+		var msg = eval(code);
+		//console.log(typeof msg);
+		switch(typeof msg){
+			case "undefined":
+				defined= false;
+				break;
+			case "string":
+				string= true;
+				msg = '"' + msg + '"';
+				break;
+			case "object":
+				object= true;
+				msg = Object.prototype.toString.call(msg);
+				break;
+			case "function":
+				fun = true;
+				console.log(msg.toString());
+				msg = msg.toString().replace(/{(.|\n|\r)*}/,"{}");
+				break;
+			case "number":
+				number= true;
+				break;
+		}
+	}catch(e){
+		//console.log(e.stack);
+		var line =  e.lineNumber? " @" +e.lineNumber : "";
+		var column = e.columnNumber  ? ":" + e.columnNumber : "";
+		msg =  e.message + line + column;
+		var error = true;
+	};
+	var p = document.createElement("p");
+	var a = p.classList;
+	error?a.add("error"):
+	string?a.add("string"):
+	object?a.add("object"):
+	fun?a.add("function"):
+	number?a.add("number"):
+	!defined?a.add("undefined"):"";
+	p.innerHTML = msg;
+	debug.appendChild(p);
+}
+
+
 function debug(e){
-	//console.log(e.keyCode);
+	// console.log(e.keyCode);
+	var code = editor.getValue();
 	if (e.keyCode == 82 && e.altKey) {
 		e.preventDefault();
-		var debug = document.getElementsByClassName('debug')[0];
-		var code = editor.getValue();
 		console.log(code);
-		var error = false,
-			defined = true,
-			object = false,
-			string= false,
-			number= false;
-			fun = false;
-		try{
-			var msg = eval(code);
-			//console.log(typeof msg);
-			switch(typeof msg){
-				case "undefined":
-					defined= false;
-					break;
-				case "string":
-					string= true;
-					msg = '"' + msg + '"';
-					break;
-				case "object":
-					object= true;
-					msg = Object.prototype.toString.call(msg);
-					break;
-				case "function":
-					fun = true;
-					console.log(msg.toString());
-					msg = msg.toString().replace(/{(.|\n|\r)*}/,"{}");
-					break;
-				case "number":
-					number= true;
-					break;
-			}
-		}catch(e){
-			//console.log(e.stack);
-			var line =  e.lineNumber? " @" +e.lineNumber : "";
-			var column = e.columnNumber  ? ":" + e.columnNumber : "";
-			msg =  e.message + line + column;
-			var error = true;
-		};
-		var p = document.createElement("p");
-		var a = p.classList;
-		error?a.add("error"):
-		string?a.add("string"):
-		object?a.add("object"):
-		fun?a.add("function"):
-		number?a.add("number"):
-		!defined?a.add("undefined"):"";
-		p.innerHTML = msg;
-		debug.appendChild(p);
+		_console(code);
 		debug.scrollTop = debug.scrollHeight - debug.clientHeight;
-	}
+	}if (e.keyCode==83 && e.ctrlKey) {
+		e.preventDefault();
+		save(code);
+	};
 }
+
+save = (function(){//闭包引用a，不会重复生成，跟上面的style一样
+	a = document.createElement("a");
+	return function(s){
+		document.body.appendChild(a);
+		var blob = new Blob([s], {type: "/text"});
+		a.href = window.URL.createObjectURL(blob);
+		a.download = "demo.js";
+		a.style.display = "none";
+		a.click();
+	}
+})()

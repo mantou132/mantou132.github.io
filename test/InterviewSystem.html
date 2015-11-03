@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="CodeMirror2/codemirror.css">
     <link rel="stylesheet" href="CodeMirror2/show-hint.css">
+
 </head>
 <!-- body是逻辑主题 -->
 
@@ -26,7 +27,8 @@
     <!-- main是页面内容主题，这个页面不是文章，那就没有article和section了，也没有nav目录，也没有blockquote了 -->
     <main>
         <div class="code">
-    	   <textarea style="display: none;" class="code" id="code"  name="code">//Ctrl + D 删除当前行
+    	   <textarea style="display: none;" class="code" id="code"  name="code">//_console("debug")
+//Ctrl + D 删除当前行
 //Alt + R 调试
 //setTheme("light")切换主题
 fire = function(){
@@ -54,6 +56,11 @@ fire();</textarea>
         <address>
         </address>
     </footer>
+    <script>
+    if (window.attachEvent) {
+        document.body.innerHTML = "不支持IE";
+    }
+    </script>
     <script src="js/webrtc.js" sync></script>
     <script src="js/RTCMultiConnection-v2.0.js" sync></script>
     <script src="CodeMirror2/codemirror.js"></script>
@@ -62,10 +69,10 @@ fire();</textarea>
     <script src="CodeMirror2/javascript.js"></script>
     <script src="js/interview_system.js"></script>
 
-
+<!-- 
     <script src="js/togetherjs-min.js"></script>
     <script>TogetherJS(this)</script>
-    
+     -->
     <style type="text/css">
         /*补丁*/
         .togetherjs-cursor{
