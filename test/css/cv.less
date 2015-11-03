@@ -8,6 +8,24 @@
 @fontI:"Bookman Old Style Bold Italic","微软雅黑";
 @import (less) "main.less";
 @import (reference) "prefix.less";
+
+// 下面怎么用LESS写？？
+::-moz-selection{
+	color: @themeBGColor;
+	background: @themeColor;
+}
+::-webkit-selection{
+	color: @themeBGColor;
+	background: @themeColor;
+}
+::-ms-selection{
+	color: @themeBGColor;
+	background: @themeColor;
+}
+::selection{
+	color: @themeBGColor;
+	background: @themeColor;
+}
 html {
     color: rgba(0, 0, 0, 0.7);
     background-color: #333;
@@ -128,7 +146,7 @@ main{
 		color: @themeColor;
 		margin-bottom: 0;
 		a::after{
-			content:  "www.594mantou.com/test/" attr(href);
+			content:  "mantou132.github.io/test/" attr(href);
 			opacity: 0.5;
 			font-size: .7em;
 			font-family: @fontI;
@@ -144,6 +162,9 @@ main{
 		a:visited{
 			color: @themeColor;
 		}
+	}
+	.skill{
+		margin-bottom: 1rem;
 	}
 	.skill p{
 		margin: 0.2em 0;

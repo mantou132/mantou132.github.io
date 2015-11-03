@@ -441,6 +441,22 @@ svg {
 svg use {
   fill: currentColor;
 }
+::-moz-selection {
+  color: #e9f2f9;
+  background: #55C3DC;
+}
+::-webkit-selection {
+  color: #e9f2f9;
+  background: #55C3DC;
+}
+::-ms-selection {
+  color: #e9f2f9;
+  background: #55C3DC;
+}
+::selection {
+  color: #e9f2f9;
+  background: #55C3DC;
+}
 html {
   color: rgba(0, 0, 0, 0.7);
   background-color: #333;
@@ -574,7 +590,7 @@ main h2 {
   margin-bottom: 0;
 }
 main h2 a::after {
-  content: "www.594mantou.com/test/" attr(href);
+  content: "mantou132.github.io/test/" attr(href);
   opacity: 0.5;
   font-size: .7em;
   font-family: "Bookman Old Style Bold Italic", "微软雅黑";
@@ -589,6 +605,9 @@ main > p a:active {
 }
 main > p a:visited {
   color: #55C3DC;
+}
+main .skill {
+  margin-bottom: 1rem;
 }
 main .skill p {
   margin: 0.2em 0;
