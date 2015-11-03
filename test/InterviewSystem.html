@@ -14,22 +14,23 @@
 
 <body>
     <header>
-        <span class = "tilte">屏幕同步 & ...</span>
+        <span class = "tilte">在线编辑器 & ...</span>
         <!-- 这里是关于网站的内容 -->
         
         <nav>
             <!-- 链接列表 -->
             <dl>
-                <dt>看看其他项目：</dt><dd><a href="#top">这个……</a></dd>
+                <dt>看看其他项目：</dt><dd><a href="../card/card.html">这个嘛……</a></dd>
             </dl>
         </nav>
     </header>
     <!-- main是页面内容主题，这个页面不是文章，那就没有article和section了，也没有nav目录，也没有blockquote了 -->
     <main>
         <div class="code">
-    	   <textarea style="display: none;" class="code" id="code"  name="code">//_console("debug")
+    	   <textarea style="display: none;" class="code" id="code"  name="code">//_console("print")
 //Ctrl + D 删除当前行
 //Alt + R 调试
+//Ctrl + S 保存
 //setTheme("light")切换主题
 fire = function(){
     return "fox";
@@ -39,8 +40,8 @@ fire();</textarea>
 
     	<div class="debug"></div>
         <div class="video">
-            <button id="open-room">Open Room</button>
-            <button id="join-room">Join Room</button>
+            <button id="open-room">创建房间</button>
+            <button id="join-room">进入房间</button>
         </div>
     </main>
     <!-- footer 也是关于网站的内容，而不是当前页面的内容 -->
@@ -57,7 +58,7 @@ fire();</textarea>
         </address>
     </footer>
     <script>
-    if (window.attachEvent) {
+    if (navigator.userAgent.search("IE") >= 0) {
         document.body.innerHTML = "不支持IE";
     }
     </script>

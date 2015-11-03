@@ -208,6 +208,16 @@
 	    .debug > .error::before{
 	        content: 'x';
 	    }
+		.debug:empty::before{
+			content: "debug…";
+			line-height: 100px;
+			font-size: 3rem;
+			display: block;
+			top:calc(50% - .5rem);
+			text-align: center;
+			opacity: .3;
+			cursor: default;
+		}
 	    .video{
 	        float:right;
 	        width: calc(30% - 1rem);
@@ -243,6 +253,9 @@
 			cursor: pointer;
 			background-color: #ddd;
 		}
+		.video button + button{
+			border-left: 1px solid ${theme[theme_select].cc};
+		}
 		.video button[disabled]:hover {
 			background-color: #ddd;
 			cursor: not-allowed;
@@ -265,14 +278,14 @@
 			if (arguments.length) {
 				try{
 					st.innerHTML = themeInnerHTML(name);
-					window.localStorage.theme = name;
+					window.localStorage.themeName = name;
 				}catch(e){
 					throw "可能没有这个主题";
 					console.log(e);
 				}
 			}else{
 				try{
-					st.innerHTML = themeInnerHTML(window.localStorage.theme);
+					st.innerHTML = themeInnerHTML(window.localStorage.themeName);
 				}
 				catch(e){
 					st.innerHTML = themeInnerHTML("default");
@@ -302,10 +315,33 @@ window.addEventListener("DOMContentLoaded",function(e) {
     },false);
 },false);
 
-document.addEventListener("keydown",debug,false);
+document.addEventListener("keydown",function(e){
+	if (e.keyCode == 82 && e.altKey) {
+		e.preventDefault();
+		debug(e);
+	}if (e.keyCode==83 && e.ctrlKey) {
+		e.preventDefault();
+		save(code);
+	}
+},false);
 
-window._console = function(code){
+window._console = function(code){//这个函数不能有返回，否则就被debug拿到了。
 	var debug = document.getElementsByClassName('debug')[0];
+	var p = document.createElement("p");
+	p.className = "string";
+	p.innerHTML = code;
+	debug.appendChild(p);
+	debug.scrollTop = debug.scrollHeight - debug.clientHeight;
+	if (debug.children.length == 100) {
+		debug.removeChild(debug.children[0]);
+	};
+}
+
+
+function debug(e){
+	// console.log(e.keyCode);
+	var code = editor.getValue();
+	console.log(code);
 	var error = false,
 		defined = true,
 		object = false,
@@ -343,7 +379,9 @@ window._console = function(code){
 		msg =  e.message + line + column;
 		var error = true;
 	};
-	var p = document.createElement("p");
+	_console(msg);
+	var p = document.querySelector(".debug p:last-child");
+	p.className = "";
 	var a = p.classList;
 	error?a.add("error"):
 	string?a.add("string"):
@@ -351,23 +389,6 @@ window._console = function(code){
 	fun?a.add("function"):
 	number?a.add("number"):
 	!defined?a.add("undefined"):"";
-	p.innerHTML = msg;
-	debug.appendChild(p);
-}
-
-
-function debug(e){
-	// console.log(e.keyCode);
-	var code = editor.getValue();
-	if (e.keyCode == 82 && e.altKey) {
-		e.preventDefault();
-		console.log(code);
-		_console(code);
-		debug.scrollTop = debug.scrollHeight - debug.clientHeight;
-	}if (e.keyCode==83 && e.ctrlKey) {
-		e.preventDefault();
-		save(code);
-	};
 }
 
 save = (function(){//闭包引用a，不会重复生成，跟上面的style一样
@@ -380,4 +401,14 @@ save = (function(){//闭包引用a，不会重复生成，跟上面的style一�
 		a.style.display = "none";
 		a.click();
 	}
-})()
+})();
+
+
+(function videoControls(target){
+	var observer = new MutationObserver(function callback(mutations){
+		mutations.forEach(function(mutation){
+			mutation.addedNodes[0].removeAttribute("controls");
+		});
+	})
+	observer.observe(target,{childList:true})
+})(document.querySelector(".video"))
