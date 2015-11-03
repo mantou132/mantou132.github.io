@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Interview System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="CodeMirror2/codemirror.css">
+    <link rel="stylesheet" href="CodeMirror2/show-hint.css">
+</head>
+<!-- body是逻辑主题 -->
+
+<body>
+    <header>
+        <span class = "tilte">屏幕同步 & ...</span>
+        <!-- 这里是关于网站的内容 -->
+        
+        <nav>
+            <!-- 链接列表 -->
+            <dl>
+                <dt>看看其他项目：</dt><dd><a href="#top">这个……</a></dd>
+            </dl>
+        </nav>
+    </header>
+    <!-- main是页面内容主题，这个页面不是文章，那就没有article和section了，也没有nav目录，也没有blockquote了 -->
+    <main>
+        <div class="code">
+    	   <textarea style="display: none;" class="code" id="code"  name="code">//Ctrl + D 删除当前行
+//Alt + R 调试
+//setTheme("light")切换主题
+fire = function(){
+    return "fox";
+}
+fire();</textarea>
+        </div>
+
+    	<div class="debug"></div>
+        <div class="video">
+            <button id="open-room">Open Room</button>
+            <button id="join-room">Join Room</button>
+        </div>
+    </main>
+    <!-- footer 也是关于网站的内容，而不是当前页面的内容 -->
+    <footer>
+        <!-- 这里还要一个链接列表 -->
+        <nav>
+            <span>感谢：</span>
+            <a href="//codemirror.net">CodeMirror</a>
+            <a href="//togetherjs.com/">TogetherJS</a>
+            <a href="//www.rtcmulticonnection.org/">RTCMultiConnection.js</a>
+        </nav>
+        <!-- address可能来一些作者相关信息 -->
+        <address>
+        </address>
+    </footer>
+    <script src="js/webrtc.js" sync></script>
+    <script src="js/RTCMultiConnection-v2.0.js" sync></script>
+    <script src="CodeMirror2/codemirror.js"></script>
+    <script src="CodeMirror2/show-hint.js"></script>
+    <script src="CodeMirror2/javascript-hint.js"></script>
+    <script src="CodeMirror2/javascript.js"></script>
+    <script src="js/interview_system.js"></script>
+
+
+    <script src="js/togetherjs-min.js"></script>
+    <script>TogetherJS(this)</script>
+    
+    <style type="text/css">
+        /*补丁*/
+        .togetherjs-cursor{
+            min-width: 2em;
+        }
+        *[class *=togetherjs]:not(.togetherjs-clicking):not(.togetherjs-click),
+        *[class *=togetherjs]:hover:not(.togetherjs-clicking):not(.togetherjs-click),
+        .togetherjs .togetherjs-window > header{
+            border-radius: 0px !important;
+        }
+    </style>
+</body>
+
+</html>

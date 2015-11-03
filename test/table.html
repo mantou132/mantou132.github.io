@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>table hover effect</title>
+    <style>
+    html,
+    body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        font-size: 16px;
+        background: black;
+    }
+    body:hover{
+        transition :3s 0s all ease;
+        background: red;
+    }
+    body::before {
+        display: inline-block;
+        height: 100%;
+        content: "";
+        vertical-align: middle;
+    }
+    
+    table {
+        /*border-collapse: collapse;*/
+        /*以上代码边框合并*/
+        border-spacing: .3em .2em;
+        border: 4px solid #eee;
+        /*伪元素也会撑大outline*/
+        /*outline: 4px solid #aaa;
+    		outline-offset:4px;*/
+        margin: auto;
+        display: inline-block;
+        vertical-align: middle;
+        background: #999;
+    }
+    
+    caption {
+        font-weight: 400;
+        font-size: 1.4rem;
+        line-height: 4rem;
+        color: white;
+        /*caption-side: left;*/
+    }
+    
+    table th {
+        font-style: bold;
+    }
+    
+    table td,
+    table th {
+        border: 1px solid #ddd;
+        padding: .2em .5em;
+    }
+
+	/*妈的 这个好高深*/
+    td:hover + :nth-child(-2n+5) {
+    	background: red;
+    }
+
+    /*.col1:hover 不能使用的*/
+    .col1 {
+        background: #efefef;
+    }
+    
+    .col2{
+         background: #ccc;
+    }
+    /*以下为提示信息*/ 
+	/*不让把tip放在hover对象旁边了，因为表格中有些元素比如thead group没有block的特性，不方便定位*/   
+    *[data-tip]:hover {
+        /*cursor: auto;*/
+    }
+    
+    *[data-tip]:hover::after{
+    	font-size: 1rem;
+        position: absolute;
+        display: block;
+        color: white;
+        padding: 0px .5rem;
+        content: attr(data-tip);
+        border-radius: .3rem;
+        background: #666;
+        line-height: 2rem;
+        height: 2rem;
+        bottom: 1rem;
+        left: 1rem;
+    }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption data-tip="表格标题<caption>">这是标题,这个表格包括全结构</caption>
+        <colgroup>
+            <!-- col表示列 但是能控制的属性有限，color都不能 -->
+            <col class="col1">
+                <col class="col2" span="4">
+        </colgroup>
+        <thead data-tip="这是表头">
+            <tr >
+                <th>列1</th>
+                <th>列2</th>
+                <th>列3</th>
+                <th>列4</th>
+                <th>列5</th>
+            </tr>
+        </thead>
+        <tfoot data-tip="这是“表脚”">
+            <tr>
+                <td>表脚1列</td>
+                <td>表脚2列</td>
+                <td>表脚3列</td>
+                <td>表脚4列</td>
+                <td>表脚5列</td>
+            </tr>
+        </tfoot>
+        <tbody data-tip="这是“表体”">
+            <tr>
+                <td>第1行1列</td>
+                <td>第1行2列</td>
+                <td>第1行3列</td>
+                <td>第1行4列</td>
+                <td>第1行5列</td>
+            </tr>
+            <tr>
+                <td>第2行1列</td>
+                <td>第2行2列</td>
+                <td>第2行3列</td>
+                <td>第2行4列</td>
+                <td>第2行5列</td>
+            </tr>
+            <tr>
+                <td>第3行1列</td>
+                <td>第3行2列</td>
+                <td>第3行3列</td>
+                <td>第3行4列</td>
+                <td>第3行5列</td>
+            </tr>
+            <tr>
+                <td>第4行1列</td>
+                <td>第4行2列</td>
+                <td>第4行3列</td>
+                <td>第4行4列</td>
+                <td>第4行5列</td>
+            </tr>
+            <tr>
+                <td>第5行1列</td>
+                <td>第5行2列</td>
+                <td>第5行3列</td>
+                <td>第5行4列</td>
+                <td>第5行5列</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

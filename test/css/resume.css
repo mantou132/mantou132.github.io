@@ -1,0 +1,357 @@
+:root{
+	/*计数器、变量等全局对象*/
+	--themeColor--:#55C3DC;
+	--themeBGColor--:rgb(233, 242, 249);
+}
+html{
+	color: rgba(0,0,0,0.7);
+	background-color: #333;
+}
+a,a:visited,a:hover,a:active{
+	color: currentColor;
+}
+/*visited只能修改颜色*/
+a,a:hover,a:active{
+	text-decoration: none;
+}
+body{
+	width: 40em;
+	margin:30px auto;
+	box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+	font-family: "Bookman Old Style Bold","微软雅黑";
+	background-color: rgb(233, 242, 249);
+	background-color: var(--themeBGColor--,rgb(233, 242, 249));
+}
+header{
+	background-color:#55C3DC;
+	background-color: var(--themeColor--,#55C3DC);
+	color: white;
+}
+header .highlight img{
+	height: 8em;
+	display: block;
+}
+header figure{
+	margin: 2em;
+	float: left;
+	border: .3em solid rgba(255,255,255,0.4);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.highlight{
+	position: relative;
+	box-sizing:border-box;
+	overflow: hidden;
+}
+.highlight::after{
+	position: absolute;
+	top: -70%;
+	left: -70%;
+	width: 120%;
+	height: 120%;
+	content: "";
+	display: block;
+	background-image:linear-gradient(135deg, rgba(0, 0, 0,0) 0%, rgba(0, 0, 0,0) 40%, rgba(255, 255, 255,.1) 50%, rgba(0, 0, 0,0) 60%, rgba(0, 0, 0,0) 100%) ;
+	animation: avatarHighlight 5s linear 0s infinite normal;
+}
+header address{
+	float: right;
+	text-align: right;
+	margin: 2em;
+	font-style: normal;
+	font-family: "Bookman Old Style Bold Italic";
+}
+header address div{
+	font-size: 1.3em;
+}
+header .information::after{
+	display: block;
+	clear:both;
+	content: "";
+}
+header > div:not(.information){
+	padding: 1em 2em;
+	background-color: rgba(0, 0, 0, .4);
+	text-shadow:0 1px 0 rgba(0,0,0,.6);
+}
+header div .name{
+	font-size: 3em;
+	line-height: 1em;
+	font-weight: 700;
+	letter-spacing: .1em;
+}
+header div .speak{
+	font-style: italic;
+	opacity: .5;
+	padding-left: 1em;
+}
+header div .speak::before{
+	content: "//";
+}
+main{
+	width: 100%;
+	box-sizing:border-box;
+	padding: 2em;
+	z-index: 1;
+}
+main h2{
+	color: #55C3DC;
+	color: var(--themeColor--,#55C3DC);
+}
+main h1{
+	text-shadow:0 1px 0 rgb(233, 242, 249),.5px 1.5px 0 currentColor;
+	text-shadow:0 1px 0 var(--themeBGColor--,rgb(233, 242, 249)),.5px 1.5px 0 currentColor;
+}
+main h2{
+	margin-bottom: 0;
+}
+main > p{
+	margin-top: 0;
+}
+main h2 a::after{
+	content:  "www.594mantou.com/test/" attr(href);
+	opacity: 0.5;
+	font-size: .7em;
+	font-family: "Bookman Old Style Bold Italic";
+}
+/*带供应商前缀的选择器不能用逗号写在一起*/
+main p :-webkit-any(a,a:hover,a:active,a:visited){
+	color: #55C3DC;
+	color: var(--themeColor--,#55C3DC);
+	border-bottom: 1px solid;
+}
+main p :-moz-any(a,a:hover,a:active,a:visited){
+	color: #55C3DC;
+	color: var(--themeColor--,#55C3DC); 
+	border-bottom: 1px solid;
+}
+main .skill p{
+	margin: 0.2em 0;
+	white-space: nowrap;
+	color: #55C3DC;
+	color: var(--themeColor--,#55C3DC);
+}
+main .skill p span{
+	display: inline-block;
+	vertical-align: middle;
+}
+main .skill .skillName{
+	line-height: 1em;
+	font-size: 1.3em;
+	width: 12%;
+}
+main .skill span[id]{
+	background-color:currentColor;
+	height: 1.3em;
+	will-change:width;
+	position: relative;
+}
+/* 如何用css做2个animation？*/
+main .skill p:hover span[id]::after{
+	height:100%;
+	left:100%;
+	position: absolute;
+	display: block;
+	content: "";
+	border-right :0 solid currentColor;
+	animation: hoverProgress .3s linear 0s infinite alternate;
+}
+#HTMLprogress{
+	animation: HTMLProgress 1s linear 0s 1 normal forwards;
+	-webkit-animation: HTMLProgress 1s linear 0s 1 normal forwards;
+	width: 88%;
+}
+#CSSprogress{
+	animation: CSSProgress 1.5s linear 0s 1 normal forwards;
+	-webkit-animation: CSSProgress 1s linear 0s 1 normal forwards;
+	width: 80%;
+}
+#JSprogress{
+	animation: JSProgress 2s linear 0s 1 normal forwards;
+	-webkit-animation: JSProgress 2s linear 0s 1 normal forwards;
+	width: 65%;
+}
+footer{
+	text-align: center;
+	border-top: 1px solid #55C3DC;
+	border-top: 1px solid var(--themeColor--,#55C3DC);
+	padding: 1em;
+	font-size: 1.3em;
+	color: #55C3DC;
+	color: var(--themeColor--,#55C3DC);
+}
+footer a{
+	position: relative;
+}
+footer a span{
+	display: none;
+	top: -2em;
+	/*left can % em unit？*/
+	left: 0;
+	color: #fff;
+	padding: .1em .3em;
+	border-radius: .3em;
+	background-color: #55C3DC;
+	background-color: var(--themeColor--,#55C3DC);
+}
+footer a span::after{
+	position: absolute;
+	display: block;
+	content: "";
+	top:100%;
+	left:calc(50% - .4em);
+	border-style: solid;
+	border-width: .4em;
+	border-color: #55C3DC transparent transparent;
+	border-color: var(--themeColor--,#55C3DC) transparent transparent;
+}
+footer a:hover span{
+	opacity: 1;
+	position: absolute;
+	display: block;
+	animation: iconHover 1s linear 0s 1 normal forwards;
+}
+svg{
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+    margin: -0.3em .3em 0;
+}
+svg use{
+	fill:currentColor;
+}
+@font-face {
+  font-family: "Bookman Old Style Bold";
+  src: local("Bookman Old Style Bold"),
+  		local("BookmanOldStyle-Bold"),
+  		url("../font/BOOKOSB.TTF");
+}
+@font-face {
+  font-family: "Bookman Old Style Bold Italic";
+  src: local("Bookman Old Style Bold Italic"),
+  		local("BookmanOldStyle-Bold-Italic"),
+  		url("../font/BOOKOSBI.TTF");
+}
+@keyframes avatarHighlight {
+    50% {
+    	top: 70%;
+    	left: 70%;
+    }
+    100% {
+    	top: 70%;
+    	left: 70%;
+    }
+}
+@keyframes HTMLProgress {
+    0% {
+        width: 0;
+    }
+    80% {
+        width: 90%;
+    }
+    100% {
+        width: 88%;
+    }
+}
+@keyframes CSSProgress {
+    0% {
+        width: 0;
+    }
+    33% {
+        width: 0;
+    }
+    85% {
+        width: 82%;
+    }
+    100% {
+        width: 80%;
+    }
+}
+@keyframes JSProgress {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 0;
+    }
+    90% {
+        width: 68%;
+    }
+    100% {
+        width: 65%;
+    }
+}
+@keyframes hoverProgress {
+	0% {
+        border-right-width: 0;
+    }
+	100% {
+        border-right-width: 1em;
+    }
+}
+@keyframes iconHover{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}
+@media (max-width: 1000px) {
+	body{
+		margin: 0px;
+		width: 100%;
+	}
+	header{
+		position: sticky;
+		position: -webkit-sticky;
+		top: 0;
+		z-index: 999;
+	}
+	header .information{
+		display: none;
+	}
+	header div .speak{
+		display: block;
+		padding: 0;
+	}
+	header div .speak::before{
+		content: "";
+	}
+	main .skill p{
+		margin: .5em 0;
+	}
+	main .skill .skillName{
+		width: 0;
+		overflow: visible;
+		color: #FFF;
+		z-index: 2;
+		position: relative;
+		text-indent: .3em;
+	}
+	main .skill span[id]{
+		padding-left: 12%;
+		z-index: 1;
+		height: 2em;
+	}
+	footer{
+		text-align: left;
+	}
+	footer a{
+		display: block;
+		position: static;
+		white-space: nowrap;
+	}
+	footer a span{
+		display: inline;
+		background: transparent;
+		color: inherit;
+	}
+	footer a:hover span{
+		position: static;
+		display: inline;
+		animation:none;
+	}
+	footer a span::after{
+		display: none;
+	}
+}

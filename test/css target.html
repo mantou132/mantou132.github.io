@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>MDN Example &ndash; CSS Lightbox</title>
+    <style>
+    figcaption{
+        widows: 5;
+    }
+    div.lightbox {
+        /**/
+    }
+    
+    div.lightbox:target {
+        animation: move_eye 4s linear 0s infinite alternate;
+    }
+    
+    @keyframes move_eye {
+        from {
+            background-color: #fff;
+        }
+        to {
+             background-color: #f00;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <h1>Pure CSS Lightbox</h1>
+    <p>Some sample text&hellip;</p>
+    <p>[ <a href="#example1">Open example #1</a> | <a href="#example2">Open example #2</a> ]</p>
+    <p>Another sample text&hellip;</p>
+    <div class="lightbox" id="example1">
+        <figure>
+            <a href="#" class="closemsg"></a>
+            <figcaption>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.</figcaption>
+        </figure>
+    </div>
+    <div class="lightbox" id="example2">
+        <figure>
+            <a href="#" class="closemsg"></a>
+            <figcaption>Cras risus odio, pharetra nec ultricies et, mollis ac augue. Nunc et diam quis sapien dignissim auctor. Quisque quis neque arcu, nec gravida magna. Etiam ullamcorper augue quis orci posuere et tincidunt augue semper. Maecenas varius augue eu orci auctor bibendum tristique ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus lacinia eget sed odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                <br /> Etiam varius adipiscing mi eget imperdiet. Nulla quis vestibulum leo. Integer molestie massa ut massa commodo in blandit purus aliquam. Mauris sit amet posuere massa. Ut a eleifend augue. Proin sodales mauris nec tellus pharetra dictum.
+                Cras risus odio, pharetra nec ultricies et, mollis ac augue. Nunc et diam quis sapien dignissim auctor. Quisque quis neque arcu, nec gravida magna. Etiam ullamcorper augue quis orci posuere et tincidunt augue semper. Maecenas varius augue eu orci auctor bibendum tristique ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus laciCras risus odio, pharetra nec ultricies et, mollis ac augue. Nunc et diam quis sapien dignissim auctor. Quisque quis neque arcu, nec gravida magna. Etiam ullamcorper augue quis orci posuere et tincidunt augue semper. Maecenas varius augue eu orci auctor bibendum tristique ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus laciCras risus odio, pharetra nec ultricies et, mollis ac augue. Nunc et diam quis sapien dignissim auctor. Quisque quis neque arcu, nec gravida magna. Etiam ullamcorper augue quis orci posuere et tincidunt augue semper. Maecenas varius augue eu orci auctor bibendum tristique ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus lacie ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus lacie ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursl mauris dapibus lacie ligula egestas. Morbi pharetra tortor iaculis erat porta id aliquam leo cursus. Ut nec elit vel mauris dapibus laci</figcaption>
+        </figure>
+    </div>
+</body>
+
+</html>

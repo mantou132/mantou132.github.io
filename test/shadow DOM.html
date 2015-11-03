@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <script>
+    window.addEventListener("load", function() {
+        var shadow = document.querySelector('#nameComponent').createShadowRoot();
+        var linkHTML = document.querySelector('link[rel=import]');
+        var importHTML = linkHTML.import;
+        console.log(importHTML);
+        console.log("Firefox不支持import HTML//当使用本地文档的时候不成功，难道是load时间对于本地和网络文档有区别？具体是什么区别？")
+        var template = (importHTML || document).querySelector('#nameComponentTemplate');
+        shadow.appendChild(template.content);
+    }, false);
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="import" href="import.html">
+    <title>Shadow DOM</title>
+    <meta charset="UTF-8">
+    <base href="" />
+    <style>
+    /*chrome 支持这些css*/
+    ::shadow p {
+        color: red;
+    }
+    
+    body /deep/ p {
+        outline: 1px solid #f00;
+    }
+    
+    p {
+        color: gray;
+        padding: 30px;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="bd">
+        <main id="nameComponent">
+            <div class='first'>红色</div>
+            <div class='second'>
+                <p>黄色，这里(connect)受主DOM的CSS影响（padding），也被shadow中的CSS影响（yellow）</p>
+            </div>
+            <div class='three'>
+                <p>蓝色，这里应用了shadow中的样式，但是是根据host是bd类才应用的</p>
+            </div>
+            <div class='four'>
+                <p>?色</p>
+            </div>
+        </main>
+        <div>test</div>
+    </div>
+    <footer>
+        <p>上面的DOM本身没有渲染，而是渲染的shadow DOM。这就是web组件的内容与展示分离。 但是目前浏览器尚且不支持link元素import文档，所以无法演示web组件的HTML imports。</p>
+    </footer>
+    <!-- 如果浏览器支持HTML import（chrome支持），则下面的template可由其他HTML文档中导入，使得web组件更实用 -->
+    <template id="nameComponentTemplate">
+        <style>        
+        :host {
+            margin-left: 20px;
+        }
+        
+        :host(x-bar:host) {
+            /*:host()才是标准，好像*/
+          /* 当宿主是 <x-bar> 元素时生效。 */
+        }
+
+        :host-context(.bd) content[select=".three"]::content p{/*当shadow的祖先元素是类bd时将应用下列样式*/
+            background-color: yellow;
+            width: 600px;
+        }
+        
+        content[select=".second"]::content p {
+            color: yellow;
+        }
+        
+        content[select=".three"]::content p {
+            color: blue;
+        }
+
+        </style>
+        <div style="background: purple; padding: 1em;">
+            <div style="color: red;">
+                <content select=".first"></content>
+            </div>
+            <div>
+                <content select=".second"></content>
+            </div>
+            <div>
+                <content select=".three"></content>
+            </div>
+            <div>
+            select 只能选择 host 节点的直接子元素。也就是说，不能选择后代元素(例如select=".four p")。
+                <content select=".four p"></content>
+            </div>
+            <p>这是shadowDOM中的内容，不能用p选择器直接选择，需要shadow伪元素（或者/deep/关键字，他能穿透任何元素）选择器修改样式（但能inherit宿主环境中的CSS），但是其他使用connect的内容还是受主DOM中css影响，而且主DOM中的CSS变量shadow中也可以用</p>
+        </div>
+    </template>
+    <mt-tab theme = "green">
+        <mt-tab-title>tab1</mt-tab-title>
+        <mt-tab-content>Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.</mt-tab-content>
+        <mt-tab-title>tab2</mt-tab-title>
+        <mt-tab-content>Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.</mt-tab-content>
+        <mt-tab-title>tab3</mt-tab-title>
+        <mt-tab-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.</mt-tab-content>
+        <mt-tab-title>tab4</mt-tab-title>
+        <mt-tab-content>In posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.</mt-tab-content>
+        <mt-tab-title>tab5</mt-tab-title>
+        <mt-tab-content>mt5</mt-tab-content>
+    </mt-tab>
+    <script type="text/javascript" src = "js/import.js"></script>
+
+
+
+
+    <iframe  seamless  srcdoc = "<html>
+          <head></head>
+          <body>
+
+          <!-- This <div> will hold the shadow roots. -->
+          <div>
+            <!-- This heading will not be displayed -->
+            <h4>原内容可以被&#x003c;shadow&#x003e;选到。。。</h4>
+          </div>
+
+          <script>
+            // Get the <div> above with its content
+            var origContent = document.querySelector('div');
+            // Create the first shadow root
+            var shadowroot1 = origContent.createShadowRoot();
+            // Create the second shadow root
+            var shadowroot2 = origContent.createShadowRoot();
+            var shadowroot3 = origContent.createShadowRoot();
+
+            // Insert something into the older shadow root
+            shadowroot1.innerHTML =
+              '<shadow></shadow> <p>1</p>';
+            // Insert into younger shadow root, including <shadow>.
+            // The previous markup will not be displayed unless
+            // <shadow> is used below.
+            shadowroot2.innerHTML =
+              '<shadow></shadow> <p>2</p>';
+
+              shadowroot3.innerHTML =
+              '<shadow></shadow> <p>3</p>';
+          </script>
+
+          </body>
+        </html>">
+        
+    </iframe>
+</body>
+</html>

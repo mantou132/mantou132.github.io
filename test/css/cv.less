@@ -1,0 +1,343 @@
+@themeColor: #55C3DC;//同类色都将由他变换
+@themeBGColor: rgb(233, 242, 249);//偏白色的文本背景
+@pagePadding:2em;//子元素也需要用到，包括字体大小
+@addrAlign:right;//地址联系信息对齐方式
+@skillNameWidth:12%;//技能条名字宽度
+@skillHeight:1.3em;//技能条高度
+@font:"Bookman Old Style Bold","微软雅黑";
+@fontI:"Bookman Old Style Bold Italic","微软雅黑";
+@import (less) "main.less";
+@import (reference) "prefix.less";
+html {
+    color: rgba(0, 0, 0, 0.7);
+    background-color: #333;
+    font-size: 100%;
+    line-height: 1.7em;
+}
+a:link:extend(a:visited),
+a:hover:extend(a:visited),
+a:active:extend(a:visited)  {
+    text-decoration: none;
+}
+a:visited{
+    /*visited只能修改颜色*/
+    color: currentColor;
+}
+body{
+	width: 40em;
+	margin:30px auto;
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+	font-family: @font;
+	background-color: @themeBGColor;
+	@media (max-width: 1000px) {
+		margin: 0px;
+		width: 100%;
+	}
+}
+header{
+	background-color: @themeColor;
+	color: white;
+	figure{
+		margin: @pagePadding;
+		//.reverse(@addrAlign,float);
+		float:left;
+		border: @pagePadding * .15 solid rgba(255,255,255,0.4);
+		box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+		position: relative;
+		box-sizing:border-box;
+		overflow: hidden;
+		img{
+			height: 8em;
+			display: block;
+		}
+		&::after{
+			position: absolute;
+			top: -70%;
+			left: -70%;
+			width: 120%;
+			height: 120%;
+			content: "";
+			display: block;
+			background-image:linear-gradient(135deg, rgba(0, 0, 0,0) 0%, rgba(0, 0, 0,0) 40%, rgba(255, 255, 255,.1) 50%, rgba(0, 0, 0,0) 60%, rgba(0, 0, 0,0) 100%) ;
+			.animation(avatarHighlight,5s,linear,0s,infinite,normal,none);
+		}
+	}
+	address{
+		////.reverse(@addrAlign,float);
+		float: right;
+		////.reverse(@addrAlign,text-align);
+		text-align: right;
+		margin: @pagePadding;
+		font-style: normal;
+		font-family: @fontI;
+		div{
+			font-size: 1.3em;
+		}
+	}
+	.information::after{
+		display: block;
+		clear:both;
+		content: "";
+	}
+	> div:not(.information){
+		padding: @pagePadding/2 @pagePadding;
+		background-color: darken(@themeColor,20%);
+		text-shadow:0 1px 0 rgba(0,0,0,.6);
+		.name{
+			font-size: @pagePadding*1.5;
+			line-height: 1em;
+			font-weight: 700;
+			letter-spacing: .1em;
+		}
+		.speak{
+			font-style: italic;
+			opacity: .5;
+			padding-left: 1em;
+			&::before{
+				content: "//";
+				@media (max-width: 1000px) {
+					content: "";
+				}
+
+			}
+			@media (max-width: 1000px) {
+				display: block;
+				padding: 0;
+			}
+		}
+	}//名字横栏
+	@media (max-width: 1000px) {
+		position: sticky;
+		position: -webkit-sticky;
+		top: 0;
+		z-index: 999;
+		.information{
+			display: none;
+		}
+	}
+}//header
+main{
+	width: 100%;
+	box-sizing:border-box;
+	padding: @pagePadding;
+	z-index: 1;
+	h1{
+		text-shadow:0 1px 0 @themeBGColor,.5px 1.5px 0 currentColor;
+	}
+	h2{
+		color: @themeColor;
+		margin-bottom: 0;
+		a::after{
+			content:  "www.594mantou.com/test/" attr(href);
+			opacity: 0.5;
+			font-size: .7em;
+			font-family: @fontI;
+		}
+	}
+	> p{
+		margin-top: 0;
+		a:link:extend(a:visited),
+		a:hover:extend(a:visited),
+		a:active:extend(a:visited){
+			border-bottom: 1px solid currentColor;
+		}
+		a:visited{
+			color: @themeColor;
+		}
+	}
+	.skill p{
+		margin: 0.2em 0;
+		white-space: nowrap;
+		color: @themeColor;
+		span{
+			display: inline-block;
+			vertical-align: middle;
+			&[id]{
+				background-color:currentColor;
+				height: @skillHeight;
+				will-change:width;
+				position: relative;
+				@media (max-width: 1000px) {
+					padding-left: 12%;
+					z-index: 1;
+					height: 2em;	
+				}
+			}
+		}
+		.skillName{
+			line-height: 1em;
+			font-size: @skillHeight;
+			width: @skillNameWidth;
+			@media (max-width: 1000px) {
+				width: 0;
+				overflow: visible;
+				color: #FFF;
+				z-index: 2;
+				position: relative;
+				text-indent: .3em;	
+			}
+		}
+		&:hover span[id]::after{
+			height:100%;
+			left:100%;
+			position: absolute;
+			display: block;
+			content: "";
+			border-right :0 solid currentColor;
+			.animation(hoverProgress,.3s,linear,0s,infinite,alternate,none);
+		}
+		#HTMLprogress{
+			.animation(HTMLProgress,1s,linear,0s,1,normal,forwards);
+			width: 100% - @skillNameWidth - 2%;
+		}
+		#CSSprogress{
+			.animation(CSSProgress,1.5s,linear,0s,1,normal,forwards);
+			width: 100% - @skillNameWidth - 5%;
+		}
+		#JSprogress{
+			.animation(JSProgress,2s,linear,0s,1,normal,forwards);
+			width: 100% - @skillNameWidth - 15%;
+		}
+		@media (max-width: 1000px) {
+			margin: .5em 0;
+		}
+	}//p
+}//main
+footer{
+	text-align: center;
+	border-top: 1px solid @themeColor;
+	padding: @pagePadding/2;
+	font-size: 1.3em;
+	color: @themeColor;
+	a{
+		position: relative;
+		span{
+			display: none;
+			top: -2em;
+			/*left can % em unit？*/
+			left: 0;
+			color: #fff;
+			padding: .1em .3em;
+			border-radius: .3em;
+			background-color: @themeColor;
+			&::after{
+				position: absolute;
+				display: block;
+				content: "";
+				top:100%;
+				left:e("calc(50% - .4em)");
+				border-style: solid;
+				border-width: .4em;
+				border-color: @themeColor transparent transparent;
+				@media (max-width: 1000px) {
+					display: none;
+				}
+			}
+			@media (max-width: 1000px) {
+				display: inline;
+				background: transparent;
+				color: inherit;
+			}
+		}
+		&:hover span{
+			opacity: 1;
+			position: absolute;
+			display: block;
+			.animation(iconHover,1s,linear,0s,1,normal,forwards);
+			@media (max-width: 1000px) {
+				position: static;
+				display: inline;
+				animation:none;
+			}
+		}
+		svg{
+			vertical-align: middle;
+		    margin: -0.3em .3em 0;//span padding
+		}
+		@media (max-width: 1000px) {
+			display: block;
+			position: static;
+			white-space: nowrap;
+		}
+	}//a
+	@media (max-width: 1000px) {
+		text-align: left;
+	}
+}
+@font-face {
+  font-family: "Bookman Old Style Bold";
+  src: local("Bookman Old Style Bold"),
+  		local("BookmanOldStyle-Bold"),
+  		url("../font/BOOKOSB.TTF");
+}
+@font-face {
+  font-family: "Bookman Old Style Bold Italic";
+  src: local("Bookman Old Style Bold Italic"),
+  		local("BookmanOldStyle-Bold-Italic"),
+  		url("../font/BOOKOSBI.TTF");
+}
+@keyframes avatarHighlight {
+    50% {
+    	top: 70%;
+    	left: 70%;
+    }
+    100% {
+    	top: 70%;
+    	left: 70%;
+    }
+}
+@keyframes HTMLProgress {
+    0% {
+        width: 0%;
+    }
+    80% {
+        width: 100% - @skillNameWidth;
+    }
+    100% {
+        width: 100% - @skillNameWidth -2%;
+    }
+}
+@keyframes CSSProgress {
+    0% {
+        width: 0%;
+    }
+    33% {
+        width: 0%;
+    }
+    85% {
+        width: 100% - @skillNameWidth - 3%;
+    }
+    100% {
+        width: 100% - @skillNameWidth - 5%;
+    }
+}
+@keyframes JSProgress {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 0%;
+    }
+    90% {
+        width: 100% - @skillNameWidth - 15% + 5%;
+    }
+    100% {
+        width: 100% - @skillNameWidth - 15%;
+    }
+}
+@keyframes hoverProgress {
+	0% {
+        border-right-width: 0;
+    }
+	100% {
+        border-right-width: 1em;
+    }
+}
+@keyframes iconHover{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}

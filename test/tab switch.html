@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tab switch</title>
+<style scope="true">
+
+.tab_switch{
+	width: 100%;
+	box-sizing:border-box;
+	position: relative;
+	font: 400 1em/1.5 PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+}
+.tab_switch p{
+	margin: 0px;
+	display: none;
+	text-align: justify;
+	background: #ddd;
+}
+.tab_switch > input{
+	display: none;
+}
+.tab_switch > input + label{
+	padding: .5rem;
+	border-top: .2em solid transparent;
+	cursor: pointer;
+}
+.tab_switch > input:checked + label{
+	border-top: .2em solid #aaa;
+	background: #ddd;
+	font-weight: 700;
+}
+.tab_switch > input:checked + label + p{
+	display: block;
+	padding: 1rem;
+}
+.tab_switch > input + label:not(:first-of-type){
+	position: absolute;
+	top: 0px;
+}
+.tab_switch > input + label:nth-of-type(2){left: 6em;}
+.tab_switch > input + label:nth-of-type(3){left: 12em;}
+.tab_switch > input + label:nth-of-type(4){left: 18em;}
+.tab_switch > input + label:nth-of-type(5){left: 24em;}
+.tab_switch > input + label:nth-of-type(6){left: 30em;}
+.tab_switch > input + label:nth-of-type(7){left: 36em;}
+.tab_switch > input + label:nth-of-type(8){left: 42em;}
+.tab_switch > input + label:nth-of-type(9){left: 48em;}
+
+.tab_switch > input + label{
+	line-height: 1.1rem;
+	font-size: 1.1rem;
+	width: 5.8em;
+	display: block;
+	box-sizing:border-box;
+	text-align: center;
+	background: #eee;
+}
+</style>
+</head>
+<body>
+    <div class="tab_switch">
+        <input type="radio" id="tab_title1" name="tab_switch" checked="true">
+        <label class="tab_title" for="tab_title1">选项卡1</label>
+		<p>In posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+		
+		</p>
+            
+        <input type="radio" id="tab_title2" name="tab_switch">
+        <label class="tab_title" for="tab_title2">选项卡2</label>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+		</p>
+
+		<input type="radio" id="tab_title3" name="tab_switch">
+        <label class="tab_title" for="tab_title3">选项卡3</label>
+		<p>Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+		</p>
+
+		<input type="radio" id="tab_title4" name="tab_switch">
+        <label class="tab_title" for="tab_title4">选项卡4</label>
+		<p>Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+		</p>
+
+		<input type="radio" id="tab_title5" name="tab_switch">
+        <label class="tab_title" for="tab_title5">选项卡5</label>
+		<p>这是第五个选项卡的内容。添加一个选项卡只需要复制粘贴修改2个ID就可以添加自己的内容了额。
+		</p>
+    </div>
+</body>
+
+<script type="text/javascript">
+	var obj =  document.getElementsByClassName('tab_title');
+	for (var i = obj.length - 1; i >= 0; i--) {
+		// 添加一个适当的事件监听器
+		//下面的事件处理函数在后面声明，这个函数体内任何位置多可以用，为什么火狐报错？
+		obj[i].addEventListener("mouseover",hoverListener ,false);
+		function hoverListener(event) { 
+			event.target.addEventListener("mouseout", function() {
+				clearTimeout(t);
+			},false);
+			var t = setTimeout(function(){event.target.click();},1000);
+		}
+	}
+</script>
+</html>

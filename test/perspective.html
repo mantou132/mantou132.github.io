@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transform perspective</title>
+</head>
+<style>
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+	display: flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+}
+div{
+	width: 100px;
+	height: 100px;
+	opacity: .9;
+	line-height: 100px;
+	font-size: 100px;
+	color: white;
+	text-align: center;
+	position: absolute;
+	-moz-user-select: 	none; /*火狐*/
+   -webkit-user-select: none; /*webkit浏览器*/
+   -ms-user-select: 	none; /*IE10*/
+   -khtml-user-select: 	none; /*早期浏览器*/
+   user-select: 		none; /*还没有标准*/
+}
+.box{
+	position: relative;
+	transform: rotateX(-30deg) rotateY(-45deg);
+	transform-style: preserve-3d;
+}
+/*.box::after{
+	content: "";
+	display: block;
+	width: 100px;
+	height: 100px;
+	transform:translateY(80px) rotateX(-90deg) scale(1.2);
+	background: black;
+	opacity: .5;
+	filter:blur(20px);
+}*/
+	.face1{/*qian*/
+		/*opacity: 0;*/
+		background: red;
+		transform:translateZ(50px);
+	}
+	.face2{/*shang*/
+		background: orange;
+		transform:translateY(-50px) rotateX(90deg);
+	}
+	.face3{/*you*/
+		background: yellow;
+		transform:translateX(50px) rotateY(90deg);
+	}
+	.face4{/*xia*/
+		background: green;
+		transform:translateY(50px) rotateX(-90deg);
+		box-shadow: 0px 0px 30px #000;
+	}
+	.face5{/*zuo*/
+		/*backface-visibility:hidden;*/
+		background: blue;
+		transform:translateX(-50px) rotateY(-90deg);
+	}
+	.face6{/*huo*/
+		background: magenta;
+		transform:translateZ(-50px) rotateY(180deg);
+	}
+</style>
+<body>
+	<div class="box">
+		<div class="face1">1</div>
+		<div class="face2">2</div>
+		<div class="face3">3</div>
+		<div class="face4">4</div>
+		<div class="face5">5</div>
+		<div class="face6">6</div>
+	</div>
+</body>
+</html>

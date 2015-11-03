@@ -1,0 +1,9 @@
+*{
+	box-sizing: border-box;
+}
+html,body{
+	padding: 0px;
+	margin: 0px;
+	font: 400 16px/1.5 PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+	background: #666;
+}

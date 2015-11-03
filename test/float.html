@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>float</title>
+    <style>
+    body{
+    	position: relative;
+    }
+    div {
+        display: inline;
+        float: left;
+        height: 100px;
+        /*width: 100%;*/
+        background: rgba(255, 0, 0, .8);
+        margin: 0px 10px;
+    }
+    
+    footer {
+        background: yellow;
+        /*产生新层*/
+        /*position: relative;*/
+        /*opacity: .9;*/
+        transform: translateX(0px); 
+    }
+    span,address{
+    	border: 1px solid black;
+    }
+    body > span{
+    	box-sizing:border-box;
+    	display: block;
+    	width:100%;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>h1</h1>
+    <span>before span</span>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <footer>
+        <address>footer block</address>
+        <span>footer span</span>
+    </footer>
+    <span>after span</span>
+</body>
+
+</html>

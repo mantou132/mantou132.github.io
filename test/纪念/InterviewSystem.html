@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Interview System</title>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="Prism/prism.css">  
+    <script type="text/javascript" src="Prism/prism.js"></script> 
+    <script type="text/javascript" src="js/enableTabIndent.js"></script>
+</head>
+<!-- body是逻辑主题 -->
+
+<body>
+    <header>
+        <span>屏幕同步 & ...</span>
+        <!-- 这里是关于网站的内容 -->
+        <nav>
+            <!-- 链接列表 -->
+        </nav>
+    </header>
+    <!-- main是页面内容主题，这个页面不是文章，那就没有article和section了，也没有nav目录，也没有blockquote了 -->
+    <main>
+
+    	<textarea class="code" id="code" contentEditable spellcheck=false autocomplete = false autofocus ></textarea>
+        <div class="code"id="code_warp">
+            <pre id ="code_clone" class="code" contentEditable><code class="language-javascript"></code></pre>
+        </div>
+        <script type="text/javascript" src="js/interview_system.js" async></script>
+<!-- 
+        <script src="js/togetherjs-min.js"></script>
+        <script>TogetherJS(this)</script>
+ -->
+    	<div class="debug"></div>
+        <div class="video">
+            <video></video>
+        </div>
+    </main>
+    <!-- footer 也是关于网站的内容，而不是当前页面的内容 -->
+    <footer>
+        <!-- 这里还要一个链接列表 -->
+        <nav>
+            <span>感谢：</span>
+            <a href="http://prismjs.com">prism</a>
+            <a href="http://blog.twofei.com">enableTabIndent</a>
+            <a href="http://togetherjs.com/">TogetherJS</a>
+        </nav>
+        <!-- address可能来一些作者相关信息 -->
+        <address>
+        </address>
+    </footer>
+</body>
+
+</html>

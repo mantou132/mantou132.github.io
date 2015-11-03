@@ -1,0 +1,25 @@
+.animation(@single-animation-name,@animation-duration,@timing-function,@time,@single-animation-iteration-count,@single-animation-direction,@single-animation-fill-mode){
+	animation:@arguments;
+	-webkit-animation:@arguments;
+}
+.opacity(@opacity){
+	opacity:@opacity;
+	-ms-filter:e(%("progid:DXImageTransform.Microsoft.Alpha(Opacity= %a)",@opacity * 100));
+}
+.clearFloat(){
+	content:"";
+	display: block;
+	clear: both;
+}
+.filter(...){
+	//.filter(blur(4px),filtername(value));
+	filter:@arguments;
+	-webkit-filter:@arguments;
+}
+.user-select(){
+	-moz-user-select: 	none; /*火狐*/
+	-webkit-user-select: none; /*webkit浏览器*/
+	-ms-user-select: 	none; /*IE10*/
+	-khtml-user-select: 	none; /*早期浏览器*/
+	user-select: 		none; /*还没有标准*/
+}

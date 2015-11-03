@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>Shadow DOM.html and resume.html link tag import</title>
+    <meta charset="UTF-8">
+    <base href="" />
+</head>
+
+<body>
+
+
+
+
+<template id="nameComponentTemplate">
+        <style>        
+        :host {
+            margin-left: 20px;
+        }
+        
+        :host(x-bar:host) {
+            /*:host()才是标准，好像*/
+          /* 当宿主是 <x-bar> 元素时生效。 */
+        }
+
+        :host-context(.bd) content[select=".three"]::content p{/*当shadow的祖先元素是类bd时将应用下列样式*/
+            background-color: yellow;
+            width: 600px;
+        }
+        
+        content[select=".second"]::content p {
+            color: yellow;
+        }
+        
+        content[select=".three"]::content p {
+            color: blue;
+        }
+
+        </style>
+        <div style="background: purple; padding: 1em;">
+            <div style="color: red;">
+                <content select=".first"></content>
+            </div>
+            <div>
+                <content select=".second"></content>
+            </div>
+            <div>
+                <content select=".three"></content>
+            </div>
+            <div>
+            select 只能选择 host 节点的直接子元素。也就是说，不能选择后代元素(例如select=".four p")。
+                <content select=".four p"></content>
+            </div>
+            <p>这是shadowDOM中的内容，不能用p选择器直接选择，需要shadow伪元素（或者/deep/关键字，他能穿透任何元素）选择器修改样式（但能inherit宿主环境中的CSS），但是其他使用connect的内容还是受主DOM中css影响，而且主DOM中的CSS变量shadow中也可以用</p>
+        </div>
+    </template>
+</body>
