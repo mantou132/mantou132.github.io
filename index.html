@@ -1,17 +1,136 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>春晓</title>
-  </head>
-<body>
+<html lang="zh-CN">
 
-<nav>春晓</nav>
-<div id="value">
-    <p>春眠不觉晓</p>
-    <p>处处闻啼鸟</p>
-    <p>夜来风雨声</p>
-    <p>花落知多少</p>
-</div>
+<head>
+    <title>这就是我的主页了</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{
+           box-sizing:border-box;
+        }
+        ::-moz-selection{
+            color: currentColor;
+            background: rgba(0,0,0,.16);
+        }
+        ::selection{
+            color: currentColor;
+            background: rgba(0,0,0,.3);
+        }
+        a:link,a:hover,a:active,a:visited{
+            color: inherit;
+            text-decoration: none;
+            outline: none;
+        }
+        html{
+            font-size: 16px;
+            white-space: 0px;
+            word-spacing: 0px;
+            letter-spacing: 0px;
+        }
+        body{
+            font-family: unset;
+            color: white;
+            margin: 0px;
+            scroll-behavior: smooth;
+            scroll-snap-points-y: repeat(100vh);
+            scroll-snap-type: mandatory;
+        }
+        body div{
+            height: 100vh;
+            width: 100%;
+            text-align: center;
+        }
+        body div:before{
+            display: inline-block;
+            height: 100%;
+            content: "";
+            vertical-align:middle; 
+        }
+        body div figure{
+            display: inline-block;
+            vertical-align:middle; 
+            text-shadow:0px 1px 1px rgba(0,0,0,.6);
+        }
+        body div figure figcaption{
+            font-size: 2rem;
+            line-height:120%;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: .3em;
+            border-bottom: .1em solid;
+        }
+        body div figure figcaption a:hover{
+        }
+        body div figure p{
+            margin: auto;
+            max-width: 500px;
+            word-break:break-all;
+            font-size: 1.2rem;
+        }
+        body div figure div.img{
+            height: 70vh;
+            max-height: 500px;
+            width: 70vw;
+            max-width: 800px;
+            background-size: cover;
+            background-color: rgba(0,0,0,.4);
+            background-clip: content-box;
+            background-repeat: no-repeat;
+            border:.3rem solid rgba(0,0,0,.2);
+        }
+
+        /*abobe color*/
+        body > div:nth-child(5n+1){ background: #527FD9;}
+        body > div:nth-child(5n+2){ background: #AE3F34;}
+        body > div:nth-child(5n+3){ background: #D08736;}
+        body > div:nth-child(5n+4){ background: #D9D0A7;}
+        body > div:nth-child(5n+4){ background: #BF4D34;}
+
+        body > div:nth-child(1) figure div.img{ 
+            background-image: url("image/1.gif");
+        }
+        body > div:nth-child(2) figure div.img{ 
+            background-image: url("image/2.gif");
+        }
+        body > div:nth-child(3) figure div.img{ 
+            background-image: url("image/3.gif");
+        }
+        body > div:nth-child(4) figure div.img{ 
+            background-image: url("image/4.gif");
+        }
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <figure>
+            <div class="img"></div>
+            <figcaption><a href="test/InterviewSystem.html">在线编辑器</a></figcaption>
+            <p>好吧，用了很多库</p>
+        </figure>
+    </div>
+    <div>
+        <figure>
+            <div class="img"></div>
+            <figcaption><a href="test/css.html">CSS渐变滤镜可视化工具</a></figcaption>
+            <p>第一次写js代码</p>
+        </figure>
+    </div>
+    <div>
+        <figure>
+            <div class="img"></div>
+            <figcaption><a href="test/eleme.html">饿了么页面重构</a></figcaption>
+            <p>撸了3天</p>
+        </figure>
+    </div>
+    <div>
+        <figure>
+            <div class="img"></div>
+            <figcaption><a href="test/resume.html">简历</a></figcaption>
+            <p>就是想找一份工作而已</p>
+        </figure>
+    </div>
 </body>
+
 </html>
