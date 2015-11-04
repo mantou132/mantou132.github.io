@@ -23,20 +23,25 @@
         }
         html{
             font-size: 16px;
-            white-space: 0px;
+            white-space: nowrap;
             word-spacing: 0px;
             letter-spacing: 0px;
-        }
-        body{
-            font-family: unset;
-            color: white;
-            margin: 0px;
+            overflow: hidden;
+            position: relative;
             scroll-behavior: smooth;
             scroll-snap-points-y: repeat(100vh);
             scroll-snap-type: mandatory;
         }
-        body div{
+        body{
+          position: absolute;
+          width: 100%;
+          font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+          color: white;
+          margin: 0px;
+        }
+        body > div{
             height: 100vh;
+            min-height: 320px;
             width: 100%;
             text-align: center;
         }
@@ -77,6 +82,7 @@
             background-clip: content-box;
             background-repeat: no-repeat;
             border:.3rem solid rgba(0,0,0,.2);
+            overflow: hidden;
         }
 
         /*abobe color*/
@@ -85,7 +91,7 @@
         body > div:nth-child(5n+3){ background: #D08736;}
         body > div:nth-child(5n+4){ background: #D9D0A7;}
         body > div:nth-child(5n+4){ background: #BF4D34;}
-
+/*
         body > div:nth-child(1) figure div.img{ 
             background-image: url("image/1.gif");
         }
@@ -98,35 +104,176 @@
         body > div:nth-child(4) figure div.img{ 
             background-image: url("image/4.gif");
         }
-
+*/
     </style>
+
+    <script>
+        window.addEventListener("wheel",scrollListener(),false);
+        function scrollListener(){
+            var s = (new Date()).getTime();
+            return function(e){
+                var c = (new Date()).getTime();
+                if (c - s > 500) {
+                    var dir;//用于判断滚动方向
+                    // console.log(e.deltaY);
+                    e.deltaY >= 3  ?(dir = true) :dir = false;
+                    dir?aniScroll(1):aniScroll(0);
+                    s = c;
+                };
+            }
+        }
+        function aniScroll(d){
+          var b = document.body;
+          var t = b.style.top?b.style.top.slice(0,-2):0;
+          var c = b.getBoundingClientRect();
+          var l = innerHeight;
+          if (c.top + l  > 0){
+            if (d==0) {l = Math.abs(c.top); console.log("不准上")}
+          }if(c.bottom -l < l) {
+            if (d==1){l = c.bottom - l;console.log("不准下")};
+          };
+
+          //确保下面移动l
+          var start = null;
+          function step(timestamp) { 
+            if (start === null) start = timestamp;
+            var progress = timestamp - start;
+              b.style.top = t - (d==0?-1:1)*Math.min(progress*2, l) + "px";
+            if (progress < l*10) {
+              requestAnimationFrame(step);
+            }
+          }
+          requestAnimationFrame(step);
+        }
+        window.addEventListener("keydown",(function(){
+          var s = (new Date()).getTime();
+          return function(e){
+            var c = (new Date()).getTime();  
+            if (e.keyCode == 40 || e.keyCode == 39) {
+              e.preventDefault();
+              if (c - s > 500) {
+                aniScroll(1);s = c;
+              }
+            }if (e.keyCode == 38|| e.keyCode == 37) {
+              e.preventDefault();
+              if (c - s > 500) {
+                aniScroll(0);s = c;
+              }
+            }
+          }
+        })(),false)
+
+        window.addEventListener("load",Gifffer,false)
+
+        function Gifffer() {
+          var images, d = document, ga = 'getAttribute', sa = 'setAttribute';
+          images = d && d.querySelectorAll ? d.querySelectorAll('[data-gifffer]') : [];
+          var createContainer = function(w, h, el) {
+              var con = d.createElement('DIV'), cls = el[ga]('class'), id = el[ga]('id');
+              cls ? con[sa]('class', el[ga]('class')) : null;
+              id ? con[sa]('id', el[ga]('id')) : null;
+              con[sa]('style', 'position:relative;display:inline-block;cursor:pointer;width:' + w + 'px;height:' + h + 'px;');
+              // creating play button
+              var play = d.createElement('DIV');
+              play[sa]('class','gifffer-play-button');
+              play[sa]('style', 'width:60px;height:60px;border-radius:30px;background:rgba(0, 0, 0, 0.3);position:absolute;left:' + ((w/2)-30) + 'px;top:' + ((h/2)-30) + 'px;');
+              var trngl = d.createElement('DIV');
+              trngl[sa]('style', 'width:0;height: 0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:14px solid rgba(0, 0, 0, 0.5);position:absolute;left:26px;top:16px;')
+              play.appendChild(trngl);
+              // dom placement
+              con.appendChild(play);
+              el.parentNode.replaceChild(con, el);
+              return {c: con, p: play };
+          },
+          i = 0,
+          imglen = images.length,
+          process = function(el) {
+              var url, con, c, w, h, duration,play, gif, playing = false, cc, isC, durationTimeout;
+              url = el[ga]('data-gifffer');
+              w = el[ga]('data-gifffer-width') || el.parentElement.clientWidth;
+              h = el[ga]('data-gifffer-height') || el.parentElement.clientHeight;
+              duration = el[ga]('data-gifffer-duration');
+              el.style.display = 'block';
+              c = document.createElement('canvas');
+              isC = !!(c.getContext && c.getContext('2d'));
+              if(w && h && isC) cc = createContainer(w, h, el);
+              el.onload = function() {
+                  if(isC) {
+                    var s = 1;//
+                    el.width/el.height < w/h ? (s= w/el.width) : (s = h/el.width ); //
+                      // creating the container
+                      if(!cc) cc = createContainer(w, h, el);
+                      con = cc.c;
+                      play = cc.p;
+                      con.addEventListener('click', function() {
+                          clearTimeout(durationTimeout);
+                          if(!playing) {
+                              playing = true;
+                              gif = d.createElement('IMG');
+                              gif[sa]('style', 'width:' + el.width*s + 'px;height:' + el.height*s + 'px;');
+                              gif[sa]('data-uri', Math.floor(Math.random()*100000) + 1);
+                              setTimeout(function() {
+                                  gif.src = url;
+                              }, 0);                        
+                              con.removeChild(play);
+                              con.removeChild(c);
+                              con.appendChild(gif);
+                              if(parseInt(duration) > 0) {
+                                  durationTimeout = setTimeout(function() {
+                                      playing = false;
+                                      con.appendChild(play);
+                                      con.removeChild(gif);
+                                      con.appendChild(c);
+                                      gif = null;
+                                  }, duration);
+                              }
+                          } else {
+                              playing = false;
+                              con.appendChild(play);
+                              con.removeChild(gif);
+                              con.appendChild(c);
+                              gif = null;
+                          }
+                      });
+                      // canvas
+                      c.width = w;
+                      c.height = h;
+                      c.getContext('2d').drawImage(el, 0, 0, el.width*s, el.height*s);
+                      con.appendChild(c);
+                  }
+              }
+              el.src = url;
+          }
+          for(i; i<imglen; ++i) process(images[i]);
+        }
+    </script>
 </head>
 
 <body>
     <div>
         <figure>
-            <div class="img"></div>
+            <div  class="img"><img data-gifffer="image/1.gif" alt="点击播放GIF"></div>
             <figcaption><a href="test/InterviewSystem.html">在线编辑器</a></figcaption>
             <p>好吧，用了很多库</p>
         </figure>
     </div>
     <div>
         <figure>
-            <div class="img"></div>
+            <div  class="img"><img data-gifffer="image/2.gif" alt="点击播放GIF"></div>
             <figcaption><a href="test/css.html">CSS渐变滤镜可视化工具</a></figcaption>
             <p>第一次写js代码</p>
         </figure>
     </div>
     <div>
         <figure>
-            <div class="img"></div>
+            <div  class="img"><img data-gifffer="image/3.gif" alt="点击播放GIF"></div>
             <figcaption><a href="test/eleme.html">饿了么页面重构</a></figcaption>
             <p>撸了3天</p>
         </figure>
     </div>
     <div>
         <figure>
-            <div class="img"></div>
+            <div  class="img"><img data-gifffer="image/4.gif" alt="点击播放GIF"></div>
             <figcaption><a href="test/resume.html">简历</a></figcaption>
             <p>就是想找一份工作而已</p>
         </figure>
