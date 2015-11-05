@@ -321,7 +321,7 @@ document.addEventListener("keydown",function(e){
 		debug(e);
 	}if (e.keyCode==83 && e.ctrlKey) {
 		e.preventDefault();
-		save(code);
+		save(editor.getValue());
 	}
 },false);
 
