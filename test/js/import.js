@@ -1,43 +1,50 @@
 "use strict";
-let title_width;
-let theme_select = "gray";
-let theme = {
+var title_width;
+var theme_select = "gray";
+var theme = {
 	gray:{
 		bgc:"#ddd",
 		ligth:"#eee",
-		dark:"#aaa"
+		dark:"#aaa",
+		color:"#000"
 	},
 	green:{
 		bgc:"#70E6CA",
 		ligth:"#A4EAD9",
-		dark:"rgb(55, 188, 155)"
+		dark:"rgb(55, 188, 155)",
+		color:"#fff"
 	},
 	red:{
 		bgc:"#FFD2D2",
 		ligth:"#FFF0F0",
-		dark:"#F16464"
+		dark:"#F16464",
+		color:"#fff"
 	}, 
 	blue:{
 		bgc:"#A6DFEC",
 		ligth:"#D3F7FF",
-		dark:"#50ABBF"
+		dark:"#50ABBF",
+		color:"#fff"
 	}, 
 	gold:{
 		bgc:"#E2ECA6",
 		ligth:"#E8F78C",
-		dark:"#B1C14C"
+		dark:"#B1C14C",
+		color:"#000"
 	}
 }
 function st(e){ 
 	e?theme_select=e:"";
 	return `
 	.tab_switch{
+		color: ${theme[theme_select].color};
+		text-shadow:none;
 		width: 100%;
 		box-sizing:border-box;
 		position: relative;
 		font: 400 1em/1.5 PingFang SC, Lantinghei SC, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
 	}
-	.tab_switch p{
+	.tab_switch div{
 		border:none;
 		outline:none;
 		margin: 0px;
@@ -58,7 +65,7 @@ function st(e){
 		background: ${theme[theme_select].bgc};
 		font-weight: 700;
 	}
-	.tab_switch > input:checked + label + p{
+	.tab_switch > input:checked + label + div{
 		display: block;
 		padding: 1rem;
 	}
@@ -86,22 +93,29 @@ function st(e){
 	}`;
 }
 
-let tem = ` 	<input type="radio" id="tab_title" name="tab_switch" autocomplete="off">
+var tem = ` 	<input type="radio" id="tab_title" name="tab_switch" autocompvare="off">
 		<label class="tab_title" for="tab_title">选项卡1</label>
-		<p></p>`;
+		<div></div>`;
 
-let MTTab = function(){};
-let MTTabTltle = function(){};
-let MTTabContent = function(){};
+var MTTab = function(){};
+var MTTabTltle = function(){};
+var MTTabContent = function(){};
 (function(superClass){
-	let hover =function(e){
-		e.addEventListener("mouseover",hoverListener ,false);
+	var hover =function(e){
+		function click(e){//Firefox直接element的click方法无效
+			var inputs = e.parentElement.querySelectorAll("input[id^=tab_title]");
+			for (var i = 0; i < inputs.length; i++) {
+				inputs[i].checked = inputs[i] == e.parentElement.querySelector("#"+e.htmlFor) ? true : false;
+			};
+		}
 		function hoverListener(event) { 
 			e.addEventListener("mouseout", function() {
 				clearTimeout(t);
 			},false);
-			var t = setTimeout(function(){e.click();},1000);
+			var t = setTimeout(function(){click(e)},1000);
 		}
+		e.addEventListener("mouseover",hoverListener ,false);
+		e.addEventListener("click",function(){click(e)} ,false);
 	}
 	//ES6的class extend写很简单
 	MTTab.prototype = Object.create(superClass.prototype,{
@@ -114,8 +128,8 @@ let MTTabContent = function(){};
 		createdCallback: {
 			value:function() {
 				this.drawShadow();
-				let call = this;
-				let observer = new MutationObserver(function(mutations,observer) {
+				var call = this;
+				var observer = new MutationObserver(function(mutations,observer) {
 				  	call.drawShadow();
 				  	console.log(mutations);
 				})
@@ -129,36 +143,36 @@ let MTTabContent = function(){};
 		},
 		drawShadow:{
 			value:function(t){
-				let style = document.createElement("style")
+				var shadow = this.createShadowRoot();
+				var style = document.createElement("style")
 				style.innerHTML =  this.getAttribute("theme")?st(this.getAttribute("theme")):st();
-				let div = document.createElement("div")
+				var div = document.createElement("div")
 				div.innerHTML = tem;
-				let docf = document.createDocumentFragment();
-				let tab_switch = document.createElement("div")
+				var docf = document.createDocumentFragment();
+				var tab_switch = document.createElement("div")
 				tab_switch.className = "tab_switch";
-				let tt = this.querySelectorAll("mt-tab-title");
-				let tc = this.querySelectorAll("mt-tab-content");
-				for (let n = 1 ,j = tt.length ; n <= j; n++) {
+				var tt = this.querySelectorAll("mt-tab-title");
+				var tc = this.querySelectorAll("mt-tab-content");
+				for (var n = 1 ,j = tt.length ; n <= j; n++) {
 					div.querySelector("label").setAttribute("for",`tab_title${n}`);
 					div.querySelector("input").setAttribute("id",`tab_title${n}`);
 					div.querySelector("label").innerHTML = tt[n-1].innerHTML;
-					div.querySelector("p").innerHTML = tc[n-1].innerHTML;
-					let div_c = div.cloneNode(true);
+					div.querySelector("div").innerHTML = tc[n-1].innerHTML;
+					var div_c = div.cloneNode(true);
 					hover(div_c.querySelector("label"));
-					for (let i = 0,z = div_c.children.length; i < z; i++) {
+					for (var i = 0,z = div_c.children.length; i < z; i++) {
 						docf.appendChild(div_c.children[0]);
 					};
 				}
 				tab_switch.appendChild(docf);
 				tab_switch.firstElementChild.setAttribute("checked",true);
-				let shadow = this.createShadowRoot();
 				shadow.appendChild(style);
 				shadow.appendChild(tab_switch);
 			}
 		},
 		updateTheme: {value:function(t){
                 if (["green", "red", "blue", "gold","gray"].indexOf(t) > -1) {
-                    let stl = this.shadowRoot.firstElementChild;
+                    var stl = this.shadowRoot.firstElementChild;
                     stl.innerHTML = st(t);
                 }else{
                 	this.setAttribute("theme","gray");

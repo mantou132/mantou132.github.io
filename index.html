@@ -23,7 +23,6 @@
         }
         html{
             font-size: 16px;
-            white-space: nowrap;
             word-spacing: 0px;
             letter-spacing: 0px;
             overflow: hidden;
@@ -45,7 +44,7 @@
             width: 100%;
             text-align: center;
         }
-        body div:before{
+        body > div:before{
             display: inline-block;
             height: 100%;
             content: "";
@@ -70,7 +69,7 @@
             margin: auto;
             max-width: 500px;
             word-break:break-all;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         body div figure div.img{
             height: 70vh;
@@ -84,13 +83,49 @@
             border:.3rem solid rgba(0,0,0,.2);
             overflow: hidden;
         }
-
+        mt-tab{
+            margin: 1rem;
+            display: block;
+        }
         /*abobe color*/
         body > div:nth-child(5n+1){ background: #527FD9;}
         body > div:nth-child(5n+2){ background: #AE3F34;}
         body > div:nth-child(5n+3){ background: #D08736;}
         body > div:nth-child(5n+4){ background: #D9D0A7;}
-        body > div:nth-child(5n+4){ background: #BF4D34;}
+        body > div:nth-child(5n+5){ background: #BF4D34;}
+
+        body aside{
+            position: fixed;
+            right: 1rem;
+            top: calc(50% - 6rem);
+        }
+        body aside a{
+            font-size: 2rem;
+            line-height: 3rem;
+            cursor: pointer;
+            display: inherit;
+            font-family: "icon";
+            opacity: .3;
+            -moz-user-select:   none; /*火狐*/
+            -webkit-user-select: none; /*webkit浏览器*/
+            -ms-user-select:    none; /*IE10*/
+            -khtml-user-select:     none; /*早期浏览器*/
+            user-select:        none; /*还没有标准*/
+            -webkit-animation: 1s cubic-bezier(.77,0,.18,1) 0s alternate none infinite running breathing;
+            animation: 1s cubic-bezier(.77,0,.18,1) 0s alternate none infinite running breathing;
+        }
+        body aside a:hover{
+            opacity: .6;
+        }
+        @keyframes breathing{
+            to{
+                opacity: .6;
+            }
+        }
+        @font-face {
+            font-family: 'icon';
+            src:url('data:;base64,AAEAAAALAIAAAwAwT1MvMg8SBawAAAC8AAAAYGNtYXAXVtKJAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZoH4jBIAAAF4AAAB5GhlYWQHln/YAAADXAAAADZoaGVhB3ADyAAAA5QAAAAkaG10eBIAAQoAAAO4AAAAHGxvY2EA8gGoAAAD1AAAABBtYXhwAAoAWgAAA+QAAAAgbmFtZZlKCfsAAAQEAAABhnBvc3QAAwAAAAAFjAAAACAAAwOAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpAgPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6QL//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAACAGYAMwOaAzMAKwBXAAAlBwYiJy4BNTQ2PwE+ARcWMjc2NCcmBg8BDgEVFBYXHgEzMjY/ATY0JyYiBwEuAQ8BBhQXHgE/ATYWFx4BFRQGDwEGJicmIgcGFBceATMyNj8BPgE1NCYnAZIpG0wbDQ4ODZgYTiEPKg4PDzeXR5kbHh4bHEglJUccKg8PDyoPAc88lDc0Dw8PKg8zHUMYDQ4ODaM3OgsPKg8ODxk6HyVOJqMbHh4b3CkaGg0hEhMhDJgXLCEODw8qDjcTRpgbRicmRhwcHBwcKQ8qDw8PAkw7BjY0DisODwEPNBwOGQwhExIhDaE3EwsPDw8qDxkZJSahHEYmJ0YbAAABAFIA7AOuAq4AEwAAEyYiBwYUFwEWMjcBNjQnJiIHCQGECh4KCgoBlQoeCgGVCgoKHgr+hP6EAq4KCgodC/5wCwsBkAsdCgoK/pIBbgAAAAEAUgDsA64CrgATAAAlFjI3NjQnASYiBwEGFBcWMjcJAQN8Ch4KCgr+awoeCv5rCgoKHgoBfAF87AsLCh0KAZEKCv5vCh0KCwsBbf6TAAAAAQAAAAAAAHbUKhNfDzz1AAsEAAAAAADSZZ3UAAAAANJlndQAAAAAA64DMwAAAAgAAgAAAAAAAAABAAADwP/AAAAEAAAAAAADrgABAAAAAAAAAAAAAAAAAAAABwQAAAAAAAAAAAAAAAIAAAAEAABmBAAAUgQAAFIAAAAAAAoAFAAeAKIAygDyAAEAAAAHAFgAAgAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAOAK4AAQAAAAAAAQAHAAAAAQAAAAAAAgAHAGAAAQAAAAAAAwAHADYAAQAAAAAABAAHAHUAAQAAAAAABQALABUAAQAAAAAABgAHAEsAAQAAAAAACgAaAIoAAwABBAkAAQAOAAcAAwABBAkAAgAOAGcAAwABBAkAAwAOAD0AAwABBAkABAAOAHwAAwABBAkABQAWACAAAwABBAkABgAOAFIAAwABBAkACgA0AKRpY29tb29uAGkAYwBvAG0AbwBvAG5WZXJzaW9uIDEuMABWAGUAcgBzAGkAbwBuACAAMQAuADBpY29tb29uAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBvAG5SZWd1bGFyAFIAZQBnAHUAbABhAHJpY29tb29uAGkAYwBvAG0AbwBvAG5Gb250IGdlbmVyYXRlZCBieSBJY29Nb29uLgBGAG8AbgB0ACAAZwBlAG4AZQByAGEAdABlAGQAIABiAHkAIABJAGMAbwBNAG8AbwBuAC4AAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+        }
 /*
         body > div:nth-child(1) figure div.img{ 
             background-image: url("image/1.gif");
@@ -107,7 +142,17 @@
 */
     </style>
 
+    <script src="test/js/import.js" sync></script>
+
     <script>
+    document.addEventListener("click",function(e){
+        var navs = [].slice.call(document.querySelectorAll("aside > a"));
+        if (navs.indexOf(e.target) == 0) {
+            aniScroll(0);
+        }if (navs.indexOf(e.target) == 1) {
+            aniScroll(1);
+        }
+    },false)
       //不正常
       // window.addEventListener("resize",function(e){
       //   setTimeout(function(){
@@ -118,8 +163,9 @@
       function scrollListener(){
           var s = (new Date()).getTime();
           return function(e){
+              e.preventDefault();
               var c = (new Date()).getTime();
-              if (c - s > 500) {
+              if (c - s > 350) {
                   var dir;//用于判断滚动方向
                   // console.log(e.deltaY);
                   e.deltaY >= 3  ?(dir = true) :dir = false;
@@ -144,8 +190,8 @@
         function step(timestamp) { 
           if (start === null) start = timestamp;
           var progress = timestamp - start;
-            b.style.top = t - (d==0?-1:1)*Math.min(progress*2, l) + "px";
-          if (progress < l*10) {
+            b.style.top = t - (d==0?-1:1)*Math.min(progress*3, l) + "px";
+          if (progress < l*5) {
             requestAnimationFrame(step);
           }
         }
@@ -157,12 +203,12 @@
           var c = (new Date()).getTime();  
           if (e.keyCode == 40 || e.keyCode == 39) {
             e.preventDefault();
-            if (c - s > 500) {
+            if (c - s > 350) {
               aniScroll(1);s = c;
             }
           }if (e.keyCode == 38|| e.keyCode == 37) {
             e.preventDefault();
-            if (c - s > 500) {
+            if (c - s > 350) {
               aniScroll(0);s = c;
             }
           }
@@ -265,6 +311,26 @@
     </div>
     <div>
         <figure>
+            <div  class="img custom">
+                <mt-tab theme="gold">
+                    <mt-tab-title>选项卡1</mt-tab-title>
+                    <mt-tab-content>
+                        <p>下面的内容需要支持Web Components的浏览器才可以看到效果,Firefox用户在about:config中设置dom.webcomponents.enabled为true</p>
+                        <p><em>你可以把鼠标指针放在未激活的选项卡标题上，1秒后它就会自动激活，当然你也可以点击它立即切换到这个选项卡。</em></p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti.
+                        </p>
+                    </mt-tab-content>
+                    <mt-tab-title>选项卡2</mt-tab-title>
+                    <mt-tab-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec felis enim, placerat id eleifend eu, semper vel sem. Sed interdum commodo enim venenatis pulvinar. Proin mattis lorem vitae diam scelerisque hendrerit. Fusce cursus imperdiet mauris, vitae hendrerit velit dignissim a. Suspendisse potenti. Aenean feugiat facilisis diam, in posuere sapien mattis vel. Proin molestie rutrum diam, pharetra feugiat ligula sollicitudin sed. Etiam cursus diam quis tellus aliquam gravida. Aliquam erat volutpat.
+                    </mt-tab-content>
+                </mt-tab>
+            </div>
+            <figcaption><a href="http://codepen.io/mantou132/pen/eprXZK">Web Components</a></figcaption>
+            <p>Web Components可以真正意义上的创建自己的web组件，而不会影响到其他元素或者被其他元素影响。它包含四部分：Custom Elements、HTML Templates、Shadow DOM、HTML Imports。</p>
+        </figure>
+    </div>
+    <div>
+        <figure>
             <div  class="img"><img data-gifffer="image/2.gif" alt="点击播放GIF"></div>
             <figcaption><a href="test/css.html">CSS渐变滤镜可视化工具</a></figcaption>
             <p>第一次写js代码</p>
@@ -284,6 +350,10 @@
             <p>就是想找一份工作而已</p>
         </figure>
     </div>
+    <aside class="nav">
+        <a>&#xe902</a>
+        <a>&#xe901</a>
+    </aside>
 </body>
 
 </html>
