@@ -13,10 +13,12 @@ function enumeration(array){
 	}
 	enumeration.values = [];
 	for (var i = array.length - 1; i >= 0; i--) {
-		var e = Object.create(proto);
-		e.name = array[i];
-		e.value = i;
-		enumeration.values.push(e);
+		if (array[i]) {
+			var e = Object.create(proto);
+			e.name = array[i];
+			e.value = i;
+			enumeration.values.push(e);
+		}
 	}
 
 	//返回一个新的枚举类型类，他包含有限个该类的值

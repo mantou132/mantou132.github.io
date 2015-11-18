@@ -1,10 +1,14 @@
-requirejs.config({
-    config: {
-        'Deck': {
-            test: 'testModuleConfig'
-        }
-    }
+// requirejs.config({
+//     config: {
+//         'Deck': {
+//            	test: 'testModuleConfig'
+//         }
+//     }
+// });
+require(["Deck","User"], function(Deck,User) {
+	deck = new Deck(true);
 });
-require(["Deck","Robot","View"], function(Deck) {
+require(["View"], function(View) {
+	document.registerElement('mt-poker', View);
+});
 
-});
