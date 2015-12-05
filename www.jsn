@@ -88,10 +88,22 @@ function server(request, response) {
         response.end(filemaps('./'));
     }else if(rurl=='/sitemap'||rurl.indexOf('/sitemap/') == 0) {
         response.writeHead(200,{'Content-type': 'text/html'});
-        response.end(sitemap('./' + rurl.slice(9),'sitemap'));
+        try{
+            data = sitemap('./' + rurl.slice(9),'sitemap');
+            response.end(data);
+        }catch(e){
+            console.log(e);
+            Response(req,res,error);
+        }
     }else if(rurl=='/ftp'||rurl.indexOf('/ftp/') == 0) {
         response.writeHead(200,{'Content-type': 'text/html'});
-        response.end(sitemap('./' + rurl.slice(5),'ftp'));
+        try{
+            data = sitemap('./' + rurl.slice(5),'ftp');
+            response.end(data);
+        }catch(e){
+            console.log(e);
+            Response(request,response,error);
+        }
     } else {
         var filePath = './' + rurl;
         Response(request, response, filePath, mime);
