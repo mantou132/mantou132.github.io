@@ -18,13 +18,19 @@ define(function(){
 	User.prototype.haveJunko = function (n){
 
 	}
+	//是否有三张
+	User.prototype.haveThree = function (n){
+
+	}
 	//是否有对子
 	User.prototype.havePair = function (){
 		
 	}
 	//是否有炸
 	User.prototype.haveBomb = function (){
-		
+		this.cards.forEach(function(c){
+			c
+		})
 	}
 
 	return User;

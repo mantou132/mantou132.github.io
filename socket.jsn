@@ -1,0 +1,15 @@
+var net = require('net');
+
+//http先用TCP传输层创建socket链接，只是基于host和端口。
+net.createServer(function (conn) {
+    conn.on('data', function (data) {
+        console.log(data);
+        conn.write([
+            'HTTP/1.1 200 OK',
+            'Content-Type: text/plain',
+            'Content-Length: 11',
+            '',
+            'Hello World'
+        ].join('\n'));
+    });
+}).listen(80);
